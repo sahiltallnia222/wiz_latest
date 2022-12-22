@@ -219,9 +219,9 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 # from pathlib import Path
 # BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = "django-insecure-i@1w&6#hi_9u#b(&oe0-&nms5r=75qqa0*4r+4^jm1zt1-ai*3"
-# DEBUG = False
+# DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = []
 
 # INSTALLED_APPS = [
 #     "django.contrib.admin",
