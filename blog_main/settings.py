@@ -70,7 +70,7 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net/']
+CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net']
 
 
 
