@@ -10,7 +10,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-7ppocbnx@w71dcuinn*t^_mzal
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['https://blogwizard.azurewebsites.net/']
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
