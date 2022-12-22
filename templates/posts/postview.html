@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% block title %}
+{{post.title}}
+{% endblock %}
+{% block content %}
+
+<div class="post-detail-section">
+    <section class="left-area">
+        <div class="post-detail">
+            <h1 style="font-weight: 500;">{{post.title}}</h1>
+            <p>{{post.content|safe}}</p>
+            <div style="display: flex; justify-content: space-between; margin-top: 1.6rem;">
+                <div class="date-com">
+                    <span class="menu-itm"><span id="likebtn">
+                            <i id="like_icon" class="{{like_btn_class}} fa-heart fa-lg" style="cursor: pointer;"></i>
+                        </span> <span id="total_likes" style="margin-left: 0.2rem;">{{total_likes}}</span>
+                    </span>
+                </div>
+                <div class="date-com">
+                    <span class="menu-itm" id="post-date">{{post.created_date.date}}</span>
+                </div>
+            </div>
+            <span id="like-error" style="color: red;font-size: 0.8rem;display: none;">Login to like the post</span>
+        </div>
+        <div class="rec-posts">
+            <a href="/posts/post/{{post_1.slug}}">
+                <div class="rec-post box-shadow">
+                    <img src="/media/{{post_1.thumbnail}}" alt="img">
+                    <div class="post-details">
+                        <div class="title">{{post_1.title}}</div>
+                    </div>
+                </div>
+            </a>
+            <a href="/posts/post/{{post_2.slug}}">
+                <div class="rec-post">
+                    <img src="/media/{{post_2.thumbnail}}" alt="img">
+                    <div class="post-details">
+                        <div class="title">{{post_2.title}}</div>
+                    </div>
+                </div>
+            </a>
+            <a href="/posts/post/{{post_3.slug}}">
+                <div class="rec-post box-shadow">
+                    <img src="/media/{{post_3.thumbnail}}" alt="img">
+                    <div class="post-details">
+                        <div class="title">{{post_3.title}}</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="comment-section">
+            <p style="margin-bottom: 1rem;">{{total_comments}} Comments</p>
+            <div class="write-comment">
+                <form id="comment_form" method="post">
+                    {% csrf_token %}
+                    <textarea rows="1" placeholder="Add a Comment" class="add-comment" id="comment-input"
+                        oninput="auto_height('comment-input')"></textarea>
+                    <p style="font-size: 0.8rem;color: red;" id="error-msg">Please enter a valid comment !</p>
+                    <div class="btn">
+                        <input type="reset" value="cancel" class="cancel-btn"></input>
+                        <input class="sub-btn" type="submit" value="Comment"></input>
+                    </div>
+                </form>
+            </div>
+            <div id="comments"></div>
+        </div>
+    </section>
+    <div class="right-side">
+        <div class="side-box box-shadow" style="height: 412px;">
+            <p class="heading-name">POPULAR POSTS</p>
+            <div class="side-post-group"></div>
+        </div>
+        <div class="side-box box-shadow">
+            <p class="heading-name">CATEGORIES</p>
+            <ul>
+                <li><a href="{% url 'posts:posts_by_cat' 'education' %}">Education</a></li>
+                <li><a href="{% url 'posts:posts_by_cat' 'science-and-technology' %}">Science and Technology</a></li>
+                <li><a href="{% url 'posts:posts_by_cat' 'finance' %}">Finance</a></li>
+                <li><a href="{% url 'posts:posts_by_cat' 'other' %}">Other</a></li>
+            </ul>
+        </div>
+        <div class="side-box box-shadow">
+            <p class="heading-name">TAGS</p>
+            <div class="tags">
+                <div class="tags">
+                    {% for tag in tags %}
+                    <span class="tag" id="{{tag}}"><a href="/?tag={{tag}}">{{tag}}</a></span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const url = window.location.pathname.split("/");
+    $("#comment_form").submit(function (e) {
+        e.preventDefault();
+        if ($("#comment-input").val().trim() == '') {
+            $('#comment-input').addClass('add-err-comment')
+            $('#comment-input').removeClass('add-comment')
+            $('#error-msg').show()
+        } else if ('{{user}}' == 0) {
+            console.log('Please log in !');
+        }
+        else {
+            $.ajax({
+                method: "POST",
+                url: `/posts/addcomment/${url[3]}`,
+                data: {
+                    content: $("#comment-input").val(),
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                },
+                success: function (res) {
+                    content = $("#comment-input").val()
+                    $("#comment-input").val('')
+                    $('#comments').prepend(`<div class='comment'><div class='right'><p class='username'>{{request.user.username}}</p><p class='com-date'>Few seconds ago</p><p class='com'>${content}</p></div></div>`)
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        }
+    });
+    function reply(x) {
+        $(`#reply_form_${x}`).submit(function (e) {
+            e.preventDefault();
+            const url = window.location.pathname.split("/");
+            if ($(`#reply-input_${x}`).val().trim() == '') {
+                $(`#reply-input_${x}`).addClass('add-err-comment')
+                $(`#reply-input_${x}`).removeClass('add-comment')
+                $(`#error-reply_${x}`).show()
+            }
+            else {
+                $.ajax({
+                    method: "POST",
+                    url: `/posts/addreply/${url[3]}`,
+                    data: {
+                        parent: $(`#comment-id_${x}`).val(),
+                        content: $(`#reply-input_${x}`).val(),
+                        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                    },
+                    success: function (res) {
+                        content = $(`#reply-input_${x}`).val()
+                        $(`#reply-input_${x}`).val('')
+                        $(`#recent-reply_${x}`).html(`<div class='comment'><div class='right'><p class='username'>{{request.user.username}}</p><p class='com-date'>Few seconds ago</p><p class='com'>${content}</p></div></div>`)
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    },
+                });
+            }
+        });
+    }
+    $('#likebtn').click(function () {
+        $.ajax({
+            method: 'GET',
+            url: "{% url 'posts:like_post' slug %}",
+            success: function (res) {
+                $('#total_likes').html(res.likes)
+                if (res.user == 1) {
+                    if ($('#like_icon').hasClass('fa-regular')) {
+                        $('#like_icon').removeClass('fa-regular')
+                        $('#like_icon').addClass('fa-solid')
+                    }
+                    else {
+                        $('#like_icon').removeClass('fa-solid')
+                        $('#like_icon').addClass('fa-regular')
+                    }
+                }
+                else {
+                    $('#like-error').show()
+                }
+            },
+            error: function (err) {
+                console.log('Error occured.');
+            }
+        })
+    })
+
+
+    function popularPosts() {
+        $.ajax({
+            url: '/posts/popular-posts',
+            success: function (res) {
+                data = res.data
+                data.map(post => {
+                    const d = new Date(post.created_date.substr(0, 10))
+                    $('.side-post-group').append(`
+                <a href=/posts/post/${post.slug}>
+                <div class="side-post">
+                            <div class="img">
+                            <img src=${post.thumbnail} alt="">
+                        </div>    
+                       
+                        <div class="side-post-details">
+                            <div class="side-post-title">${post.title}</div>
+                            <div class="side-post-date">${d.toLocaleDateString('nl-NL')}</div>
+                        </div>
+                    </div>
+                </a>
+                    
+                    `)
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+    popularPosts()
+    function addReply(x) {
+        $(x).parent().siblings('#add_reply').toggle()
+    }
+    function handleReplies(x, y) {
+        if ($(x).children('.txt').html() == 'SHOW REPLIES') {
+            $(x).children('.txt').html('HIDE REPLIES')
+            $(`#spinner_${y}`).show()
+            load_replies(y)
+        }
+        else {
+            $(x).children('.txt').html('SHOW REPLIES')
+            $(`#spinner_${y}`).hide()
+            $(`.replies-box_${y}`).hide()
+        }
+        $(x).children('#aro').toggleClass('flip-arrow')
+    }
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    function get_date(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString();
+    }
+    function load_comments() {
+        $.ajax({
+            url: "{% url 'posts:load_comments' slug %}",
+            success: function (res) {
+                res.data.map(comment => {
+                    d = new Date(comment.created_date)
+                    $('#comments').append(`
+                <div class="comment">
+                    <div class="right">
+                        <p class='username'>${comment.userdetails.username}</p>
+                        <p class="com-date">${months[d.getMonth()] + ' ' + get_date(d.getDate()) + ' ' + d.getFullYear()}</p>
+                        <p class='com'>${comment.content}</p>
+                        <div class="comment-actions">
+                            <p style='color: gray; font-size: 0.775rem; cursor: pointer;' onclick="addReply(this)">REPLY
+                            </p>
+                        </div>
+                        <div id="add_reply" style="display: none;">
+                            <div class="write-comment">
+                                <form id="reply_form_${comment.id}" method="post" onsubmit="return false">
+                                    {% csrf_token %}
+                                    <input type="number" name="comment-id_${comment.id}" id="comment-id_${comment.id}"
+                                        value="${comment.id}" readonly style="display: none;">
+                                    <textarea rows="1" placeholder="Add a Reply" class="add-comment"
+                                        id="reply-input_${comment.id}"
+                                        oninput="auto_height('reply-input_${comment.id}')"></textarea>
+                                    <p style="font-size: 0.8rem;color: red;" class="error-reply"
+                                        id="error-reply_${comment.id}">Please enter a valid reply
+                                        !</p>
+                                    <div class="btn">
+                                        <input type="reset" value="cancel" class="cancel-btn"></input>
+                                        <button class="sub-btn" onclick="reply('${comment.id}')">Reply</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="recent-reply_${comment.id}" style="margin-bottom: 0.8rem;"></div>
+                        
+                        ${(comment.children > 0) ? `<p id="replies" onclick="handleReplies(this,${comment.id})">
+                            <span class="txt">SHOW REPLIES</span>
+                            <span id="aro"><i class="fa-solid fa-angle-down"></i></span>
+                        </p>`: ''}
+                        <div class="lds-ring" id="spinner_${comment.id}" style='margin:auto;display:none'>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="replies-box replies-box_${comment.id}" style='display:none'></div>
+                    </div>
+                </div>`)
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+    load_comments()
+    function load_replies(x) {
+        $.ajax({
+            url: `/posts/replies/{{slug}}/${x}`,
+            success: function (res) {
+                $(`#spinner_${x}`).hide()
+                $(`.replies-box_${x}`).show()
+                res.data.map(reply => {
+                    d = new Date(reply.created_date)
+                    $(`.replies-box_${x}`).append(`<div class='comment'><div class="right">
+                                    <p class='username'>${reply.userdetails.username}</p>
+                                    <p class="com-date">${months[d.getMonth()] + ' ' + get_date(d.getDate()) + ' ' + d.getFullYear()}</p>
+                                    <p class='com'>${reply.content}</p>
+                                    <div class="comment-actions">
+                                        <p style='color: gray; font-size: 0.775rem; cursor: pointer;'
+                                            onclick="addReply(this)">REPLY</p>
+                                    </div>
+                                    <div id="add_reply" style="display: none;">
+                                        <div class="write-comment">
+                                            <form id="reply_form_${reply.id}" method="post" onsubmit="return false">
+                                                {% csrf_token %}
+                                                <input type="number" name="comment-id_${reply.id}"
+                                                    id="comment-id_${reply.id}" value="${x}" readonly
+                                                    style="display: none;">
+                                                <textarea rows="1" placeholder="Add a Reply" class="add-comment"
+                                                    id="reply-input_${reply.id}"
+                                                    oninput="auto_height('reply-input_${reply.id}')"></textarea>
+                                                <p style="font-size: 0.8rem;color: red;" class="error-reply"
+                                                    id="error-reply_${reply.id}">Please enter a valid reply
+                                                    !</p>
+                                                <div class="btn">
+                                                    <input type="reset" value="cancel" class="cancel-btn"></input>
+                                                    <button class="sub-btn"
+                                                        onclick="reply('${reply.id}')">Reply</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="recent-reply_${reply.id}" style="margin-bottom: 1rem;"></div></div>`)
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+</script>
+
+{% endblock %}

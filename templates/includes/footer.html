@@ -1,0 +1,70 @@
+{% load static %}
+
+<footer class="footer box-shadow" id="footer">
+    <div class="wrapper">
+        <div class="footer-box">
+            <div class="logo-box">
+                <p><a href="/" class="logo">Logo</a></p>
+            </div>
+            <p style="font-size: 0.9rem;">Have an Issue ?</p>
+            <p style="font-size: 0.9rem;">Mail us at</p>
+            <div><a href="mailto: sahiltallnia222@gmail.com">sahiltallnia222@gmail.com</a></div>
+        </div>
+        <div class="footer-box">
+            <div class="heading">
+                USEFUL LINKS
+            </div>
+            <div>
+                <div class="divnks">
+                    <div><a href="/">Home</a></div>
+                    {% if request.user.is_authenticated %}
+                    <div><a href="{% url 'posts:liked_posts' %}">Liked Posts</a></div>
+                    <div><a href="/accounts/activate-account">Activate Account</a></div>
+                    <div><a href="/accounts/deactivate-account" style="color: red;">Deactivate Account</a></div>
+                    <div><a href="{% url 'accounts:logout' %}" style="color: red;">Log out</a></div>
+                    {% else %}
+                    <div><a href="/accounts/activate-account">Activate Account</a></div>
+                    <div class="sign"><a href="{% url 'accounts:register' %}">Sign up</a></div>
+                    <div class="sign"><a href="{% url 'accounts:login' %}">Log in</a></div>
+                    {% endif %}
+                    <hr style="margin-top: 0.6rem;margin-bottom: 0.6rem;">
+                    <div><a href="/privacy-policy">Privacy Policy</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-box about-us">
+            <p class="heading">CATEGORIES</p>
+            <div class="about">
+                <div>
+                    <div><a href="{% url 'posts:posts_by_cat' 'education' %}">Education</a></div>
+                    <div><a href="{% url 'posts:posts_by_cat' 'science-and-technology' %}">Science and Technology</a>
+                    </div>
+                    <div><a href="{% url 'posts:posts_by_cat' 'finance' %}">Finance</a></div>
+                    <div><a href="{% url 'posts:posts_by_cat' 'other' %}">Other</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-box about-us">
+            <p class="heading">ABOUT US</p>
+            <div class="about" style="font-size: 0.9rem;">
+                <p>Sahil Tallnia</p>
+                <p>IIT ROPAR student</p>
+            </div>
+        </div>
+        <div class="footer-box">
+            <div class="heading">CONTACT US</div>
+            <div>
+                <div>Uklana Mandi Hisar (125113)</div>
+                <div>Haryana India</div>
+                <div><a href="mailto: sahiltallnia222@gmail.com">Email: sahiltallnia222@gmail.com</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright box-shadow">
+        <div>
+            <p style="font-size: 0.8rem;text-align: center;padding: 1.3rem;"><span>Copyright © 2022 - All Right
+                    Reserved. Designed and Developed by</span> <span
+                    style="font-weight: 500;display: indivne-block; width: 4.5rem;">Sahil Tallnia</span></p>
+        </div>
+    </div>
+</footer>

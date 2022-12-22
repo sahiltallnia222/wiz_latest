@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login {% endblock %}
+
+{% block content %}
+
+
+<div class="user-form box-shadow">
+    <p style="font-size: 1.5rem; font-weight: 400;">Log in</p>
+
+    <form action="{% url 'accounts:login' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-item">
+            <label for="id_email">Email</label>
+            <input type="email" name="email" id="id_email">
+        </div>
+        <div class="form-item">
+            <label for="id_password">Password</label>
+            <input type="password" name="password" id="id_password">
+        </div>
+        <div class="form-item">
+            <input type="submit" class="sub-btn" value="Log in">
+        </div>
+    </form>
+    <p style="margin-top: 0.6rem;"><a style="font-size: 0.9rem; color: #3756f7;text-decoration: underline;" href="{% url 'accounts:forgot_password' %}">forgot password</a></p>
+    <p style="margin-top: 0.5rem;">Don't have account ? <a href="{% url 'accounts:register' %}" style="font-size: inherit; color: #3756f7; font-weight:500 ;margin-left: 0.4rem;">Sign up</a></p>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+

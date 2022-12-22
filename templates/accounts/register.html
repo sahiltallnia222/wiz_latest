@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Registration {% endblock %}
+
+{% block content %}
+
+<div class="user-form box-shadow">
+    <p style="font-size: 1.5rem; font-weight: 400;">Sign up</p>
+
+    <form action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-item">
+            <label for="id_username">Username</label>
+            {{form.username}}
+        </div>
+        <div class="form-item">
+            <label for="id_email">Email</label>
+            {{form.email}}
+        </div>
+        <div class="form-item">
+            <label for="id_password">Password</label>
+            {{form.password}}
+        </div>
+        <div class="form-item">
+            <label for="id_confirm_password">Confirm Password</label>
+            {{form.confirm_password}}
+        </div>
+        <div style="margin-top: 1rem;">
+            <ul class="errorlist">
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <li style="color: red; font-size: 0.9rem;margin-top: 0.4rem;">{{error}}</li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <li style="color: red; font-size: 0.9rem;margin-top: 0.4rem;">{{form.non_field_errors}}</li>
+        </div>
+        <div class="form-item">
+            <input type="submit" class="sub-btn" value="Sign up">
+        </div>
+    </form>
+    <p style="text-align: center;margin-top: 1.2rem;">Already have a account ? <a href="{% url 'accounts:login' %}" style="font-size: inherit; color: #3756f7; font-weight:500 ;margin-left: 0.4rem;">Log in</a></p>
+</div>
+
+{% endblock %}

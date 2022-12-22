@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.8rem;
+}
+
+li {
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    object-fit: cover;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1, 1.1);
+    }
+}
+
+
+
+body {
+    position: relative;
+    width: 100%;
+    background-color: #d8dee8;
+}
+
+.box-shadow {
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.right-menu {
+    position: absolute;
+    left: 0rem;
+    top: 3rem;
+    right: 0.5rem;
+    display: none;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 10rem;
+        background-color: #f1f1f1;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    li a.active {
+        background-color: #04AA6D;
+    }
+
+    li a:hover:not(.active) {
+        background-color: rgba(85, 85, 85, 0.203);
+    }
+}
+
+
+// ----------------------alert box---------------------
+.alert-box {
+    padding: 0.8rem 1rem;
+    display: inline-block;
+    position: fixed;
+    bottom: -4rem;
+    color: #fff;
+    transform: translateX(-50%);
+    left: 50%;
+    width: 300px;
+    text-align: center;
+    background-color: white;
+}
+
+.alert-success {
+    background-color: #2fb986;
+}
+
+.alert-error {
+    background-color: #f66459;
+}
+
+.alert-warning {
+    background-color: #ffaa2c;
+}
+
+.downside {
+    animation: downside 1s 1;
+}
+
+.upside {
+    animation: upside 1s 1;
+}
+
+@keyframes upside {
+    from {
+        bottom: -4rem;
+    }
+
+    to {
+        bottom: 2rem;
+    }
+}
+
+@keyframes downside {
+    from {
+        bottom: 2rem;
+    }
+
+    to {
+        bottom: -4rem;
+    }
+}
+
+// ----------------------alert box---------------------
+.content-wrapper {
+    width: 62.5rem;
+    margin: auto;
+    min-height: 100vh;
+    margin-top: 1rem;
+}
+
+.wrapper {
+    width: 62.5rem;
+    margin: auto;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-right: 3rem;
+}
+
+.footer {
+    height: 10vh;
+    background-color: #fff;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+// -------------------------------------------navbar starts------------------------------------------------
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left,
+    .right {
+        display: flex;
+        align-items: center;
+    }
+    .list-items {
+        display: flex;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        gap: 2rem;
+
+        a {
+            font-weight: 500;
+
+            &:hover {
+                color: #3756f7;
+            }
+        }
+    }
+
+}
+
+
+
+// ---------------------user form start from here--------------------
+
+input {
+    margin-top: 0.4rem;
+    padding: 0.5rem;
+    outline: none;
+    border: 2px solid rgba(223, 222, 222, 0.683);
+
+    &:focus {
+        border: 2px solid #3757f77f;
+    }
+}
+
+
+.user-form {
+    width: 380px;
+    margin: auto;
+    height: auto;
+    background-color: #fff;
+    padding: 2rem;
+
+    .form-item {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sub-btn {
+        padding: 0.7rem;
+        color: white;
+        font-size: 0.95rem;
+        cursor: pointer;
+        background-color: #3756f7;
+        border: none;
+        outline: none;
+
+    }
+}
+
+
+// second-section of home page
+
+.posts-container {
+    display: flex;
+    gap: 0.2rem;
+
+    .left-side {
+        padding: 1rem;
+        width: 70%;
+        background-color: #fff;
+        display: grid;
+        grid-template-columns: 20.5rem 20.5rem;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .post {
+            height: 18.5rem;
+
+            .img {
+                height: 11.5rem;
+                overflow: hidden;
+            }
+
+            .post-detail {
+                .title {
+                    padding: 0.2rem 0.1rem;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 0.92rem;
+                    overflow: hidden;
+                    color: rgb(61, 61, 61);
+
+                    &:hover {
+                        color: #000;
+                    }
+                }
+
+                .publish-date {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.4rem;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+
+                    span {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+    .right-side {
+        width: 30%;
+        background-color: #fff;
+    }
+}
+
+// --------------------post detail section----------------------------
+
+
+.post-detail-section {
+    display: flex;
+    height: 100vh;
+    gap: 0.2rem;
+
+    .left-area {
+        width: 70%;
+
+        .post-detail {
+            width: 100%;
+            background-color: #fff;
+            padding: 1.5rem;
+            height: 100%;
+
+            .date-com {
+                .menu-itm {
+                    margin-right: 1rem;
+                    cursor: pointer;
+
+                }
+            }
+
+            .account {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+
+                .account-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.4rem;
+
+                    .account-logo {
+                        width: 3rem;
+                        height: 3rem;
+                        background-color: rgb(138, 138, 138);
+                        border-radius: 50%;
+                        overflow: hidden;
+
+                        img {
+                            object-fit: cover;
+                        }
+                    }
+                }
+
+                .other-options {
+                    .subs-btn {
+                        background-color: #000;
+                        color: #ececec;
+                        padding: 0.5rem 1rem;
+                        cursor: pointer;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.6px;
+                        border: none;
+                        border-radius: 10rem;
+                    }
+
+                    .unsubs-btn {
+                        background-color: #ececec;
+                        color: #000;
+                        padding: 0.5rem 1rem;
+                        cursor: pointer;
+                        font-size: 0.85rem;
+                        letter-spacing: 0.6px;
+                        border: none;
+                        border-radius: 10rem;
+
+                    }
+                }
+            }
+
+            .desc {
+                margin-top: 1rem;
+            }
+
+        }
+    }
+
+    .side-area {
+        width: 30%;
+        height: 100%;
+
+        .share {
+            padding: 1.5rem;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            background-color: #fff;
+            margin-bottom: 1rem;
+
+            .share-icons {
+                display: flex;
+                padding-top: 0.8rem;
+                gap: 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+// ----------------------------responsiveness-----------------------------------
+@media only screen and(max-width:63rem) {
+
+    .wrapper,
+    .content-wrapper {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+
+    .wrapper,
+    .content-wrapper {
+        width: 100%;
+    }
+
+    .user-form {
+        width: 95vw;
+    }
+}

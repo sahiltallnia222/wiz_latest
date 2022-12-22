@@ -1,0 +1,28 @@
+{% if messages %}
+{% for message in messages %}
+
+<div class="box-shadow alert-box alert-{{message.tags}}" id="alert">
+    {{message}}
+    <script>
+        let alert = document.getElementById('alert')
+            show_alert = () => {
+                if (alert.classList.contains('upside')) {
+                    alert.classList.remove('upside')
+                }
+                if (alert.classList.contains('downside')) {
+                    alert.classList.remove('downside')
+                }
+                alert.classList.add('upside')
+                alert.style.bottom = '2rem';
+                setTimeout(() => {
+                    alert.classList.remove('upside')
+                    alert.classList.add('downside')
+                    alert.style.bottom='-4rem'
+                },4000)
+            }
+            show_alert()
+    </script>
+</div>
+
+{% endfor %}
+{% endif %}

@@ -1,0 +1,88 @@
+{% load static %}
+
+<header class=" nav-header">
+    <nav class="wrapper">
+        <div class="left">
+            <div onclick="handle_icon_toggle('menu-list')">
+                <i class="fa-solid fa-bars fa-xl" id="ac-icon" style="cursor: pointer;"></i>
+                <div id="menu-list">
+                    <ul>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="/" class="">Home</a></li>
+                        <li><a href="{% url 'posts:liked_posts' %}">Liked Posts</a></li>
+                        <li><a href="{% url 'accounts:logout' %}" style="color: red;">Log out</a></li>
+                        {% else %}
+                        <li><a href="/" class="">Home</a></li>
+                        <li class="sign"><a href="{% url 'accounts:register' %}">Sign up</a></li>
+                        <li class="sign"><a href="{% url 'accounts:login' %}">Log in</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p><a href="/" class="logo">Logo</a></p>
+            </div>
+        </div>
+        <div class="right">
+
+            <div class="search-box">
+                <form action="{% url 'posts:search_posts' %}" method="get">
+                    <input type="text" name="search" id="search" placeholder="Search...">
+                </form>
+                <span id="search-icons"><i class="fa-sharp fa-solid fa-magnifying-glass fa-md" id="ac-icon"
+                        style="cursor: pointer;" onclick="handleSearch()"></i></span>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<script>
+
+    let cur_url = window.location.href.split('/')
+    if (cur_url[4] == 'search-posts' && cur_url[5].length > 8) {
+        $('#search-icons i').removeClass('fa-magnifying-glass')
+        $('#search-icons i').addClass('fa-xmark')
+        let search_query = cur_url[5]
+        $('#search').val(search_query.substring(8).split('+').join(' '))
+        $('.search-box').css({ 'border': '1px solid black', 'padding-right': '0.6rem' })
+        $('#search').show()
+        if (window.matchMedia('(max-width: 63rem)').matches) {
+            console.log($(window).width());
+            $('.search-box').outerWidth('98%')
+        }
+        else {
+            $('.search-box').width('20rem')
+        }
+    }
+
+    function handleSearch() {
+        if ($('#search-icons i').hasClass('fa-magnifying-glass')) {
+            $('#search-icons i').removeClass('fa-magnifying-glass')
+            $('#search-icons i').addClass('fa-xmark')
+            $('.search-box').css({ 'border': '1px solid black', 'padding-right': '0.6rem' })
+            $('#search').show()
+            if (window.matchMedia('(max-width: 63rem)').matches) {
+                console.log($(window).width());
+                $('.search-box').outerWidth('98%')
+            }
+            else {
+                $('.search-box').width('20rem')
+            }
+
+        }
+        else if ($('#search-icons i').hasClass('fa-xmark')) {
+            $('#search-icons i').removeClass('fa-xmark')
+            $('#search-icons i').addClass('fa-magnifying-glass')
+            $('#search').val('')
+            $('.search-box').width('0rem')
+            $('.search-box').css({ 'border': 'none', 'padding-right': '0rem' })
+            $('#search').hide()
+        }
+    }
+    $(function () {
+        $('input[type="text"]').change(function () {
+            this.value = $.trim(this.value);
+        });
+    });
+</script>

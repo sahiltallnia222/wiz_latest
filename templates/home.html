@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block title %}
+LOGO
+{% endblock %}
+
+
+{% block content %}
+<div class="home-head">
+    <!-- <div class="header-posts">
+        <div class="header-left"></div>
+        <div class="header-right">
+            <div class="right-top"></div>
+            <div class="bottom-left"> </div>
+            <div class="bottom-right"></div>
+        </div>
+    </div> -->
+    <div class="posts-container">
+        <div class="left-side ">
+            <div class="posts-area">
+                <div class="main-section">
+                    <div id="load_more">
+                        <div class="lds-ring" id="spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <button id="load_btn" onclick="loadmore()">
+                            Load More
+                        </button>
+                        <p id="no_more_post">That is All</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="side-box box-shadow" style="height: 412px;">
+                <p class="heading-name">POPULAR POSTS</p>
+                <div class="side-post-group"></div>
+            </div>
+            <div class="side-box box-shadow">
+                <p class="heading-name">CATEGORIES</p>
+                <ul>
+                    <li><a href="{% url 'posts:posts_by_cat' 'education' %}">Education</a></li>
+                    <li><a href="{% url 'posts:posts_by_cat' 'science-and-technology' %}">Science and Technology</a>
+                    </li>
+                    <li><a href="{% url 'posts:posts_by_cat' 'finance' %}">Finance</a></li>
+                    <li><a href="{% url 'posts:posts_by_cat' 'other' %}">Other</a></li>
+                </ul>
+            </div>
+            <div class="side-box box-shadow">
+                <p class="heading-name">TAGS</p>
+                <div class="tags">
+                    <div class="tags">
+                        {% for tag in tags %}
+                        <div class="tag" id="{{tag}}"><a href="/?tag={{tag}}">{{tag}}</a></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+
+    // ------------------------------------------------------------------------------------------------------------
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    function get_date(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString();
+    }
+    page_number = 1;
+    function loadPost(page_number) {
+        let cur_url = window.location.href.split('/')
+        var url = ''
+        if (cur_url[3]) {
+            url = `{% url "load_posts" %}` + `${cur_url[3]}&page=${page_number}`
+        }
+        else {
+            url = `{% url "load_posts" %}` + `?page=${page_number}`
+        }
+        $.ajax({
+            method: 'GET',
+            url: url,
+            beforeSend: function () {
+                $('#load_btn').hide()
+                $('#spinner').show()
+            },
+            success: function (res) {
+                data = res.data
+                if (8 * page_number >= res.total_posts) {
+                    $('#load_btn').hide()
+                    $('#spinner').hide()
+                    if (res.total_posts == 0) {
+                        $('#no_more_post').html('Data not found')
+                        $('#no_more_post').show()
+                    }
+                    else {
+                        $('#no_more_post').show()
+                    }
+                }
+                else {
+                    $('#load_btn').show()
+                    $('#spinner').hide()
+                }
+                if (cur_url[3]) {
+                    $(`#${cur_url[3].substring(5)}`).css('background-color', '#000')
+                    $(`#${cur_url[3].substring(5)} a`).css('color', '#fff')
+                }
+                data.map(post => {
+                    const d = new Date(post.modified_date.substr(0, 10))
+                    $('.main-section').append(`<div class="post">
+                <div class="img">
+                    <a href=/posts/post/${post.slug}>
+                        <img src=${post.thumbnail} alt="img" loading="lazy">
+                    </a>
+                </div>
+                    <div class="post-detail">
+                        ${post.tags.map(tag => { return `<span id='tag'><a href=/?tag=${tag.tag}>${tag.tag}</a></span>` }).join(' ')}
+                        <a href=/posts/post/${post.slug}>
+                        <h1 class="title">${post.title}</h1>
+                            </a>
+                            <p class="publish-date" id="post-date">${months[d.getMonth()] + ' ' + get_date(d.getDate()) + ' ' + d.getFullYear()}</p>
+                        </p>
+                    </div>
+                </div>
+            `)
+                })
+            }
+        })
+    }
+    loadPost(page_number)
+    function loadmore() {
+        page_number = page_number + 1;
+        loadPost(page_number)
+    }
+    function header_posts() {
+        $.ajax({
+            url: '/posts/header-posts/get-id-post/',
+            success: function (res) {
+                d1 = new Date(res[0].created_date)
+                d2 = new Date(res[1].created_date)
+                d3 = new Date(res[2].created_date)
+                d4 = new Date(res[3].created_date)
+                $('.header-left').html(`<a href=/posts/post/${res[0].slug}>
+                <img src="${res[0].thumbnail}" alt="image here" loading="lazy">
+                <div class="header-post-details">
+                    <div class="tags">
+                        <span class="tag">
+                            ${res[0].category.split('-').join(' ')}
+                        </span>
+                    </div>
+                    <h1 class="title">${res[0].title}</h1>
+                    <p class="post-date">${months[d1.getMonth()] + ' ' + get_date(d1.getDate()) + ' ' + d1.getFullYear()}</p>
+                </div>
+            </a>`)
+                $('.right-top').html(`<a href=/posts/post/${res[1].slug}>
+                <img src="${res[1].thumbnail}" alt="image here" loading="lazy">
+                <div class="header-post-details">
+                    <div class="tags">
+                        <span class="tag">
+                            ${res[1].category.split('-').join(' ')}
+                        </span>
+                    </div>
+                    <p class="title">${res[1].title}</p>
+                    <p class="post-date">${months[d2.getMonth()] + ' ' + get_date(d2.getDate()) + ' ' + d2.getFullYear()}</p>
+                </div>
+            </a>`)
+                $('.bottom-left').html(`<a href=/posts/post/${res[2].slug}>
+                <img src="${res[2].thumbnail}" alt="image here" loading="lazy">
+                <div class="header-post-details">
+                    <div class="tags">
+                        <span class="tag">
+                            ${res[2].category.split('-').join(' ')}
+                        </span>
+                    </div>
+                    <h1 class="title">${res[2].title}</h1>
+                    <p class="post-date">${months[d3.getMonth()] + ' ' + get_date(d3.getDate()) + ' ' + d3.getFullYear()}</p>
+                </div>
+            </a>`)
+                $('.bottom-right').html(`<a href=/posts/post/${res[3].slug}>
+                <img src="${res[3].thumbnail}" alt="image here" loading="lazy">
+                <div class="header-post-details">
+                    <div class="tags">
+                        <span class="tag">
+                            ${res[3].category.split('-').join(' ')}
+                        </span>
+                    </div>
+                    <p class="title">${res[3].title}</p>
+                    <p class="post-date">${months[d4.getMonth()] + ' ' + get_date(d4.getDate()) + ' ' + d4.getFullYear()}</p>
+                </div>
+            </a>`)
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+    // ------------------------------------------------------------------------------------------------------------
+
+    function load_header() {
+        let cur_url = window.location.href.split('/')
+        if (cur_url[3]) {
+            $('.header-posts').hide()
+        }
+        else {
+            header_posts()
+            $('.header-posts').show()
+        }
+    }
+
+    // load_header()
+
+
+    function popularPosts() {
+        $.ajax({
+            url: '/posts/popular-posts',
+            success: function (res) {
+                data = res.data
+                data.map(post => {
+                    const d = new Date(post.created_date.substr(0, 10))
+                    $('.side-post-group').append(`
+                <a href=/posts/post/${post.slug}>
+                <div class="side-post">
+                            <div class="img">
+                            <img src=${post.thumbnail} alt="img" loading='lazy'>
+                        </div>    
+                       
+                        <div class="side-post-details">
+                            <h1 class="side-post-title">${post.title}</h1>
+                            <div class="side-post-date">${d.toLocaleDateString('nl-NL')}</div>
+                        </div>
+                    </div>
+                </a>
+                    
+                    `)
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+    popularPosts()
+</script>
+{% endblock %}
