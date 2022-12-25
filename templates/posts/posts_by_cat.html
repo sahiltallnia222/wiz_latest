@@ -25,11 +25,11 @@
             </div>
         </div>
         <div class="right-side">
-            <div class="side-box box-shadow" style="height: 412px;">
+            <div class="side-box" style="height: 412px;">
                 <p class="heading-name">POPULAR POSTS</p>
                 <div class="side-post-group"></div>
             </div>
-            <div class="side-box box-shadow">
+            <div class="side-box">
                 <p class="heading-name">CATEGORIES</p>
                 <ul>
                     <li><a href="{% url 'posts:posts_by_cat' 'education' %}" id="education">Education</a></li>
@@ -38,7 +38,7 @@
                     <li><a href="{% url 'posts:posts_by_cat' 'other' %}" id="other">Other</a></li>
                 </ul>
             </div>
-            <div class="side-box box-shadow">
+            <div class="side-box">
                 <p class="heading-name">TAGS</p>
                 <div class="tags">
                     {% for tag in tags %}

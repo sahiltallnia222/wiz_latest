@@ -10,7 +10,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-7ppocbnx@w71dcuinn*t^_mzal
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://blogwizard.azurewebsites.net','https://www.blogwizard.live/']
 
 
 INSTALLED_APPS = [
@@ -70,7 +70,7 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net','https://www.blogwizard.live/']
 
 
 
@@ -230,6 +230,8 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     "django.contrib.sessions",
 #     "django.contrib.messages",
 #     "django.contrib.staticfiles",
+#     'django.contrib.sites', #--------------------------
+#     'django.contrib.sitemaps', #-----------------------------------
 #     'accounts',
 #     'posts',
 #     'tinymce',
@@ -237,6 +239,8 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     'ckeditor_uploader',
 #     'storages',
 # ]
+
+# SITE_ID = 1  #---------------------------------------------
 
 # MIDDLEWARE = [
 #     "django.middleware.security.SecurityMiddleware",

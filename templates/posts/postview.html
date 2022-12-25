@@ -2,8 +2,19 @@
 {% block title %}
 {{post.title}}
 {% endblock %}
+{% block posttitle %}
+{{post.title}}
+{% endblock %}
+{% block desc %}
+{{post.desc}}
+{% endblock %}
+{% block postdesc %}
+{{post.desc}}
+{% endblock %}
+{% block urlink %}
+http://127.0.0.1:8000/posts/post/{{post.slug}}
+{% endblock %}
 {% block content %}
-
 <div class="post-detail-section">
     <section class="left-area">
         <div class="post-detail">
@@ -24,7 +35,7 @@
         </div>
         <div class="rec-posts">
             <a href="/posts/post/{{post_1.slug}}">
-                <div class="rec-post box-shadow">
+                <div class="rec-post">
                     <img src="https://blogwizardstorage.blob.core.windows.net/media/{{post_1.thumbnail}}" alt="img">
                     <div class="post-details">
                         <div class="title">{{post_1.title}}</div>
@@ -40,7 +51,7 @@
                 </div>
             </a>
             <a href="/posts/post/{{post_3.slug}}">
-                <div class="rec-post box-shadow">
+                <div class="rec-post">
                     <img src="https://blogwizardstorage.blob.core.windows.net/media/{{post_3.thumbnail}}" alt="img">
                     <div class="post-details">
                         <div class="title">{{post_3.title}}</div>
@@ -66,11 +77,11 @@
         </div>
     </section>
     <div class="right-side">
-        <div class="side-box box-shadow" style="height: 412px;">
+        <div class="side-box" style="height: 412px;">
             <p class="heading-name">POPULAR POSTS</p>
             <div class="side-post-group"></div>
         </div>
-        <div class="side-box box-shadow">
+        <div class="side-box">
             <p class="heading-name">CATEGORIES</p>
             <ul>
                 <li><a href="{% url 'posts:posts_by_cat' 'education' %}">Education</a></li>
@@ -79,7 +90,7 @@
                 <li><a href="{% url 'posts:posts_by_cat' 'other' %}">Other</a></li>
             </ul>
         </div>
-        <div class="side-box box-shadow">
+        <div class="side-box">
             <p class="heading-name">TAGS</p>
             <div class="tags">
                 <div class="tags">

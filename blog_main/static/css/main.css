@@ -596,10 +596,10 @@ input:focus {
 }
 .post-detail-section .left-area .post-detail {
   width: 100%;
-  padding: 0.3rem;
   background-color: #fff;
   position: relative;
-  line-height: 1.8rem;
+  padding: 1rem;
+  line-height: 2.2rem;
   overflow: hidden;
 }
 .post-detail-section .left-area .post-detail li {
@@ -861,9 +861,6 @@ input:focus {
   }
   .nav-header nav {
     padding: 0.5rem;
-  }
-  .nav-header nav .logo {
-    margin-left: 0.8rem;
   }
   .posts-container {
     flex-direction: column;

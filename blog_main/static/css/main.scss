@@ -689,10 +689,10 @@ input {
         width: 65%;
         .post-detail {
             width: 100%;
-            padding: 0.3rem;
             background-color: #fff;
             position: relative;
-            line-height: 1.8rem;
+            padding: 1rem;
+            line-height: 2.2rem;
             li {
                 list-style-type:initial;
                 margin-left: 1.6rem;
@@ -1023,10 +1023,6 @@ input {
     .nav-header {
         nav {
             padding: 0.5rem;
-
-            .logo {
-                margin-left: 0.8rem;
-            }
         }
     }
 
