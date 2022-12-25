@@ -74,7 +74,7 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS=['blogwizard.azurewebsites.net','www.blogwizard.live']
+CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net','https://www.blogwizard.live/']
 
 
 
