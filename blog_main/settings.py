@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 import os
@@ -36,22 +35,22 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "blog_main.urls"
 
 
-CORS_ORIGIN_WHITELIST=['blogwizard.azurewebsites.net','www.blogwizard.live']
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
+# CORS_ORIGIN_WHITELIST=['blogwizard.azurewebsites.net','www.blogwizard.live']
+# CORS_ALLOW_METHODS = (
+#     'DELETE',
+#     'GET',
+#     'OPTIONS',
+#     'PATCH',
+#     'POST',
+#     'PUT',
+# )
 
 TEMPLATES = [
     {
@@ -83,7 +82,7 @@ DATABASES = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net','https://www.blogwizard.live/']
+CSRF_TRUSTED_ORIGINS=['https://blogwizard.azurewebsites.net','https://www.blogwizard.live']
 
 
 
