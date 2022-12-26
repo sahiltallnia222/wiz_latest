@@ -1,19 +1,55 @@
 {% extends 'base.html' %}
+
 {% block title %}
 {{post.title}}
 {% endblock %}
-{% block posttitle %}
-{{post.title}}
-{% endblock %}
+
 {% block desc %}
 {{post.desc}}
 {% endblock %}
-{% block postdesc %}
+
+{% block kwrds %}
+{{post.keywords}}
+{% endblock %}
+
+{% block fdesc %}
 {{post.desc}}
 {% endblock %}
-{% block urlink %}
-http://127.0.0.1:8000/posts/post/{{post.slug}}
+
+{% block ftitle %}
+{{post.title}}
 {% endblock %}
+
+{% block furlink %}
+https://www.blogwizard.live/posts/post/{{post.slug}}
+{% endblock %}
+
+{% block fthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/{{post.thumbnail}}
+{% endblock %}
+
+{% block tdesc %}
+{{post.desc}}
+{% endblock %}
+
+{% block ttitle %}
+{{post.title}}
+{% endblock %}
+
+{% block turlink %}
+https://www.blogwizard.live/posts/post/{{post.slug}}
+{% endblock %}
+
+{% block tthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/{{post.thumbnail}}
+{% endblock %}
+
+
+
+
+
+
+
 {% block content %}
 <div class="post-detail-section">
     <section class="left-area">

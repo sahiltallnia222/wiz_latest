@@ -3,8 +3,45 @@
 {% block title %}
 BlogWizard
 {% endblock %}
-{% block desc%}
-In BlogWizard you can read quality content.
+
+{% block desc %}
+BlogWizard | BlogWizard is a all in one place to share informative content on differnet topics related to Education, Science & Technology and Finance. BlogWizard provides you quality content.
+{% endblock %}
+
+{% block kwrds %}
+'blogwizard','blog wizard','blog website','blogging wizard','blogwizard.live','blogwizarddotlive'
+{% endblock %}
+
+{% block fdesc %}
+BlogWizard | BlogWizard is a all in one place to share informative content on differnet topics related to Education, Science and Technology and Finance.
+{% endblock %}
+
+{% block ftitle %}
+BlogWizard
+{% endblock %}
+
+{% block furlink %}
+https://www.blogwizard.live/
+{% endblock %}
+
+{% block fthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
+{% endblock %}
+
+{% block tdesc %}
+BlogWizard | BlogWizard is a all in one place to share informative content on differnet topics related to Education, Science and Technology and Finance.
+{% endblock %}
+
+{% block ttitle %}
+BlogWizard
+{% endblock %}
+
+{% block turlink %}
+https://www.blogwizard.live/
+{% endblock %}
+
+{% block tthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
 {% endblock %}
 
 
@@ -124,7 +161,7 @@ In BlogWizard you can read quality content.
                     <div class="post-detail">
                         ${post.tags.map(tag => { return `<span id='tag'><a href=/?tag=${tag.tag}>${tag.tag}</a></span>` }).join(' ')}
                         <a href=/posts/post/${post.slug}>
-                        <h1 class="title">${post.title}</h1>
+                        <h2 class="title">${post.title}</h2>
                             </a>
                             <p class="publish-date" id="post-date">${months[d.getMonth()] + ' ' + get_date(d.getDate()) + ' ' + d.getFullYear()}</p>
                         </p>
@@ -156,7 +193,7 @@ In BlogWizard you can read quality content.
                             ${res[0].category.split('-').join(' ')}
                         </span>
                     </div>
-                    <h1 class="title">${res[0].title}</h1>
+                    <h2 class="title">${res[0].title}</h2>
                     <p class="post-date">${months[d1.getMonth()] + ' ' + get_date(d1.getDate()) + ' ' + d1.getFullYear()}</p>
                 </div>
             </a>`)
@@ -180,7 +217,7 @@ In BlogWizard you can read quality content.
                             ${res[2].category.split('-').join(' ')}
                         </span>
                     </div>
-                    <h1 class="title">${res[2].title}</h1>
+                    <h2 class="title">${res[2].title}</h2>
                     <p class="post-date">${months[d3.getMonth()] + ' ' + get_date(d3.getDate()) + ' ' + d3.getFullYear()}</p>
                 </div>
             </a>`)
@@ -233,7 +270,7 @@ In BlogWizard you can read quality content.
                         </div>    
                        
                         <div class="side-post-details">
-                            <h1 class="side-post-title">${post.title}</h1>
+                            <h2 class="side-post-title">${post.title}</h2>
                             <div class="side-post-date">${d.toLocaleDateString('nl-NL')}</div>
                         </div>
                     </div>

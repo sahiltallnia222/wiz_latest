@@ -1,8 +1,50 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
 {{cat}}
 {% endblock %}
+
+{% block desc %}
+BlogWizard | {{cat}} category Posts
+{% endblock %}
+
+{% block kwrds %}
+'blogwizard','blog wizard','blog website','blogging wizard','blogwizard.live','blogwizarddotlive','{{cat}}'
+{% endblock %}
+
+{% block fdesc %}
+BlogWizard | {{cat}} category Posts
+{% endblock %}
+
+{% block ftitle %}
+{{cat}}
+{% endblock %}
+
+{% block furlink %}
+https://www.blogwizard.live/posts/category/{{category}}
+{% endblock %}
+
+{% block fthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
+{% endblock %}
+
+{% block tdesc %}
+BlogWizard | {{cat}} category Posts
+{% endblock %}
+
+{% block ttitle %}
+{{cat}}
+{% endblock %}
+
+{% block turlink %}
+https://www.blogwizard.live/posts/category/{{category}}
+{% endblock %}
+
+{% block tthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
+{% endblock %}
+
 
 
 {% block content %}

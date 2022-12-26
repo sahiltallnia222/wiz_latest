@@ -8,23 +8,28 @@
     <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="seo, python, django, web development">
+    <meta name="keywords" content="{% block kwrds %}{% endblock %}">
     <meta name="description" content="{% block desc %}{% endblock %}" />
     <meta name="author" content="Sahil Tallnia">
 
 
-    <meta property="og:url" content="{% block urlink %}{% endblock %}" />
+    <meta property="og:url" content="{% block furlink %}{% endblock %}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="{% block posttitle %}{% endblock %}" />
-    <meta property="og:description" content="{% block postdesc %}{% endblock %}" />
-    <meta property="og:image" content="{% block posthumb %}{% endblock %}" />
-    
-    <meta name="twitter:image" content="https//example.com/image.png" />
-    <meta property="twitter:image:alt" content="Description of the image" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@twitterhandle" />
-    
-    
+    <meta property="og:title" content="{% block ftitle %}{% endblock %}" />
+    <meta property="og:description" content="{% block fdesc %}{% endblock %}" />
+    <meta property="og:image" content="{% block fthumb %}{% endblock %}" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sahiltallnia222" />
+    <!-- <meta name="twitter:creator" content="@nickbilton" /> -->
+    <meta property="og:url" content="{% block turlink %}{% endblock %}" />
+    <meta property="og:title" content="{% block ttitle %}{% endblock %}" />
+    <meta property="og:description"
+        content="{% block tdesc %}{% endblock %}" />
+    <meta property="og:image"
+        content="{% block tthumb %}{% endblock %}" />
+
+
     <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'icons/apple-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'icons/apple-icon-60x60.png' %}">

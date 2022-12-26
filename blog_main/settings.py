@@ -234,8 +234,8 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 # DEBUG = True
 
 # ALLOWED_HOSTS = []
-# CORS_ORIGIN_ALLOW_ALL=True
-# CORS_ALLOW_CREDENTIALS = True
+# # CORS_ORIGIN_ALLOW_ALL=True
+# # CORS_ALLOW_CREDENTIALS = True
 
 # INSTALLED_APPS = [
 #     "django.contrib.admin",
@@ -252,7 +252,7 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     'ckeditor',
 #     'ckeditor_uploader',
 #     'storages',
-#     'corsheaders',
+#     # 'corsheaders',
 # ]
 
 # SITE_ID = 1  #---------------------------------------------
@@ -265,7 +265,7 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     "django.contrib.auth.middleware.AuthenticationMiddleware",
 #     "django.contrib.messages.middleware.MessageMiddleware",
 #     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-#     'corsheaders.middleware.CorsMiddleware'
+#     # 'corsheaders.middleware.CorsMiddleware'
 # ]
 
 # ROOT_URLCONF = "blog_main.urls"

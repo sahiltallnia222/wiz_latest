@@ -1,14 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Reset Password {% endblock %}
+{% block title %}
+Reset Password
+{% endblock %}
+
+{% block desc %}
+BlogWizard | Reset Password
+{% endblock %}
+
+{% block kwrds %}
+'blogwizard','blog wizard','blog website','blogging wizard','blogwizard.live','blogwizarddotlive','Reset Password'
+{% endblock %}
+
+{% block fdesc %}
+BlogWizard | Reset Password
+{% endblock %}
+
+{% block ftitle %}
+Reset Password
+{% endblock %}
+
+{% block furlink %}
+https://www.blogwizard.live/accounts/reset_password/
+{% endblock %}
+
+{% block fthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
+{% endblock %}
+
+{% block tdesc %}
+BlogWizard | Reset Password
+{% endblock %}
+
+{% block ttitle %}
+Reset Password
+{% endblock %}
+
+{% block turlink %}
+https://www.blogwizard.live/accounts/reset_password/
+{% endblock %}
+
+{% block tthumb %}
+https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard.webp
+{% endblock %}
+
 
 {% block content %}
 
 
 <div class="user-form">
     <p style="font-size: 0.95rem; font-weight: 400;">Please, Check your email account for password reset link.</p>
-    <p style="margin-top: 0.6rem;"><a style="font-size: 0.9rem; color: #3756f7;text-decoration: underline;" href="{% url 'accounts:forgot_password' %}">Resend link</a></p>
+    <p style="margin-top: 0.6rem;"><a style="font-size: 0.9rem; color: #3756f7;text-decoration: underline;" href="{% url 'accounts:Reset_password' %}">Resend link</a></p>
 </div>
 
 {% endblock %}
