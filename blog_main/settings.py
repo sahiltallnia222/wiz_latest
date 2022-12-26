@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sites',
     'accounts',
     'posts',
     'tinymce',
@@ -26,6 +27,8 @@ INSTALLED_APPS = [
     'storages',
     # 'corsheaders',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -244,8 +247,8 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     "django.contrib.sessions",
 #     "django.contrib.messages",
 #     "django.contrib.staticfiles",
-#     'django.contrib.sites', #--------------------------
-#     'django.contrib.sitemaps', #-----------------------------------
+#     # 'django.contrib.sites', #-------------------
+#     'django.contrib.sitemaps', #-------------------
 #     'accounts',
 #     'posts',
 #     'tinymce',
@@ -255,7 +258,7 @@ DEFAULT_FROM_EMAIL='Blog Website <sahiltallnia222@gmail.com>'
 #     # 'corsheaders',
 # ]
 
-# SITE_ID = 1  #---------------------------------------------
+# SITE_ID = 2   #------------------------
 
 # MIDDLEWARE = [
 #     "django.middleware.security.SecurityMiddleware",
