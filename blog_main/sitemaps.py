@@ -3,12 +3,12 @@ from posts.models import Post
 from django.urls import reverse
 
 class PostSitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "daily"
     priority = 0.8
     protocol = 'https'
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.all().order_by('-modified_date')
 
     def lastmod(self, obj):
         return obj.modified_date
@@ -16,16 +16,28 @@ class PostSitemap(Sitemap):
     def location(self,obj):
         return '/posts/post/%s' % (obj.slug)
 
-    
-    
-
-class StaticSitemap(Sitemap):
-    changefreq = "yearly"
+class PostCatSitemap(Sitemap):
+    changefreq = "daily"
     priority = 0.8
     protocol = 'https'
 
     def items(self):
-        return ['home','load_posts']
+        return Post.POST_CATEGORIES
+
+        
+    def location(self,obj):
+        return '/posts/category/%s' %(obj[0])
+    
+
+class StaticSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.8
+    protocol = 'https'
+
+    def items(self):
+        return ['home','privacy_policy','accounts:register','accounts:activate_account','accounts:deactivate_account','accounts:login','accounts:logout','accounts:forgot_password','accounts:reset_password','posts:liked_posts','posts:popular_posts']
 
     def location(self, item):
         return reverse(item)
+    def priority(self, item):
+        return {'home':1.0,'privacy_policy':0.8,'accounts:register':0.8,'accounts:activate_account':0.8,'accounts:deactivate_account':0.8,'accounts:login':0.8,'accounts:logout':0.8,'accounts:forgot_password':0.8,'accounts:reset_password':0.8,'posts:liked_posts':0.8,'posts:popular_posts':0.8}[item]
