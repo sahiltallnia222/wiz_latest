@@ -14,7 +14,8 @@ def home(request):
     }
     return render(request,'home.html',context)
 
-
+def sitemap(request):
+    return render(request,'sitemap.xml')
 
 @api_view(['GET'])
 def load_posts(request):

@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     path('',views.home,name='home'),
+    path('sitemap.xml',views.sitemap),
     path('privacy-policy',views.privacy_policy),
     path('load_posts/',views.load_posts,name='load_posts'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
