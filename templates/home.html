@@ -161,7 +161,7 @@ https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard
                     <div class="post-detail">
                         ${post.tags.map(tag => { return `<span id='tag'><a href=/?tag=${tag.tag}>${tag.tag}</a></span>` }).join(' ')}
                         <a href=/posts/post/${post.slug}>
-                        <h2 class="title">${post.title}</h2>
+                        <p class="title">${post.title}</p>
                             </a>
                             <p class="publish-date" id="post-date">${months[d.getMonth()] + ' ' + get_date(d.getDate()) + ' ' + d.getFullYear()}</p>
                         </p>
@@ -193,7 +193,7 @@ https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard
                             ${res[0].category.split('-').join(' ')}
                         </span>
                     </div>
-                    <h2 class="title">${res[0].title}</h2>
+                    <p class="title">${res[0].title}</p>
                     <p class="post-date">${months[d1.getMonth()] + ' ' + get_date(d1.getDate()) + ' ' + d1.getFullYear()}</p>
                 </div>
             </a>`)
@@ -217,7 +217,7 @@ https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard
                             ${res[2].category.split('-').join(' ')}
                         </span>
                     </div>
-                    <h2 class="title">${res[2].title}</h2>
+                    <p class="title">${res[2].title}</p>
                     <p class="post-date">${months[d3.getMonth()] + ' ' + get_date(d3.getDate()) + ' ' + d3.getFullYear()}</p>
                 </div>
             </a>`)
@@ -270,7 +270,7 @@ https://blogwizardstorage.blob.core.windows.net/media/post_thumbnails/BlogWizard
                         </div>    
                        
                         <div class="side-post-details">
-                            <h2 class="side-post-title">${post.title}</h2>
+                            <p class="side-post-title">${post.title}</p>
                             <div class="side-post-date">${d.toLocaleDateString('nl-NL')}</div>
                         </div>
                     </div>
