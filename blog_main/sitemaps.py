@@ -14,7 +14,7 @@ class PostSitemap(Sitemap):
         return obj.modified_date
         
     def location(self,obj):
-        return '/posts/post/%s' % (obj.slug)
+        return '/posts/post/%s/' % (obj.slug)
 
 class PostCatSitemap(Sitemap):
     changefreq = "daily"
@@ -26,7 +26,7 @@ class PostCatSitemap(Sitemap):
 
         
     def location(self,obj):
-        return '/posts/category/%s' %(obj[0])
+        return '/posts/category/%s/' %(obj[0])
     
 
 class StaticSitemap(Sitemap):
@@ -35,9 +35,9 @@ class StaticSitemap(Sitemap):
     protocol = 'https'
 
     def items(self):
-        return ['home','privacy_policy','accounts:register','accounts:activate_account','accounts:deactivate_account','accounts:login','accounts:logout','accounts:forgot_password','accounts:reset_password','posts:liked_posts','posts:popular_posts']
+        return ['home','privacy_policy','accounts:register','accounts:activate_account','accounts:login','accounts:forgot_password','accounts:reset_password','posts:popular_posts']
 
     def location(self, item):
         return reverse(item)
     def priority(self, item):
-        return {'home':1.0,'privacy_policy':0.8,'accounts:register':0.8,'accounts:activate_account':0.8,'accounts:deactivate_account':0.8,'accounts:login':0.8,'accounts:logout':0.8,'accounts:forgot_password':0.8,'accounts:reset_password':0.8,'posts:liked_posts':0.8,'posts:popular_posts':0.8}[item]
+        return {'home':1.0,'privacy_policy':0.8,'accounts:register':0.8,'accounts:activate_account':0.8,'accounts:login':0.8,'accounts:forgot_password':0.8,'accounts:reset_password':0.8,'posts:popular_posts':0.8}[item]
