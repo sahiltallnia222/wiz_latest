@@ -35,9 +35,9 @@ class StaticSitemap(Sitemap):
     protocol = 'https'
 
     def items(self):
-        return ['home','privacy_policy','accounts:register','accounts:login','posts:popular_posts']
+        return ['home','privacy_policy','posts:popular_posts']
 
     def location(self, item):
         return reverse(item)
     def priority(self, item):
-        return {'home':1.0,'privacy_policy':0.8,'accounts:register':0.8,'accounts:login':0.8,'posts:popular_posts':0.8}[item]
+        return {'home':1.0,'privacy_policy':0.8,'posts:popular_posts':0.8}[item]
