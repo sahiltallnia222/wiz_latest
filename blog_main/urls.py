@@ -8,9 +8,9 @@ from posts.models import Post
 
 from . import views
 sitemaps = {
-    'cat_posts':PostCatSitemap,
+    'static':StaticSitemap,
     'posts':PostSitemap,
-    'static':StaticSitemap
+    'cat_posts':PostCatSitemap
 }
 
 urlpatterns = [
